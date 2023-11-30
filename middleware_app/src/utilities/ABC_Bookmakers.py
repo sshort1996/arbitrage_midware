@@ -1,11 +1,13 @@
 from abc import ABC, abstractmethod
 
+
 class BookmakerAPI(ABC):
     """
     Abstract base class to represent a bookmaker's API interface.
     """
+
     is_authenticated = False
-    
+
     @abstractmethod
     def authenticate(self):
         """

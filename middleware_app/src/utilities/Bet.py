@@ -7,9 +7,12 @@ class NoDirectInstantiationMeta(type(BaseModel)):
     """
     A metaclass for preventing direct instantiation of classes.
     """
+
     def __call__(cls, *args, **kwargs):
-        raise ValueError("This class cannot be instantiated directly. Use the create() method instead.")
-    
+        raise ValueError(
+            "This class cannot be instantiated directly. Use the create() method instead."
+        )
+
 
 class CustomBaseModel(BaseModel, metaclass=NoDirectInstantiationMeta):
     pass
@@ -46,8 +49,7 @@ class Bet(CustomBaseModel):
     odds_unit: str
 
     def __str__(self):
-        return (
-            f"""
+        return f"""
             Bet(
                 event_id={self.event_id},
                 f"bookmaker_id={self.bookmaker_id},
@@ -61,7 +63,6 @@ class Bet(CustomBaseModel):
                 f"odds={self.odds:.2f},
                 f"odds_unit='{self.odds_unit}'
             )"""
-        )
 
     @classmethod
     def create(cls, **data):
@@ -81,17 +82,22 @@ class Bet(CustomBaseModel):
         instance = super().__new__(cls)
         instance.__init__(**data)
 
-        print(f'post init checks - target: {instance.target}, participants: {instance.participants}')
+        print(
+            f"post init checks - target: {instance.target}, participants: {instance.participants}"
+        )
         if instance.target not in instance.participants:
-            raise ValueError("Target participant must be one of the participants")
+            raise ValueError(
+                "Target participant must be one of the participants"
+            )
 
         # Check if event_tz is a valid timezone
         from pytz import all_timezones
+
         if instance.event_tz not in all_timezones:
             raise ValueError("Invalid timezone")
 
         return instance
-    
+
     def place_with_bookmaker(self, bookmaker_api):
         """
         Place this bet using a specific bookmaker's API.

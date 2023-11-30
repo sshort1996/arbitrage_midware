@@ -15,32 +15,36 @@ class SportsBetAU(BookmakerAPI):
     def get_available_events(self):
         # Implement the logic to retrieve available events from SportsBetAU API
         pass
-    
-    def place_bet(self, 
-                  event_id,
-                  bookmaker_id,
-                  sport,
-                  event_date,
-                  event_tz,
-                  participants,
-                  outcome,
-                  target,
-                  stake,
-                  odds,
-                  odds_unit
-                  ):
 
+    def place_bet(
+        self,
+        event_id,
+        bookmaker_id,
+        sport,
+        event_date,
+        event_tz,
+        participants,
+        outcome,
+        target,
+        stake,
+        odds,
+        odds_unit,
+    ):
         if not self.is_authenticated:
             print("Access denied: User is not authenticated.")
             return  # Exit the method if not authenticated
 
         # Implement the logic to place a bet through Acme Bookmaker's API
-        print(f"Placing bet on event {event_id} with stake {stake} at odds {odds}.")
-        
-        # Summary print statement
-        participants_str = ', '.join(participants)  # Assuming participants is a list of strings
+        print(
+            f"Placing bet on event {event_id} with stake {stake} at odds {odds}."
+        )
 
-        print(f"🎲 Bet summary:")
+        # Summary print statement
+        participants_str = ", ".join(
+            participants
+        )  # Assuming participants is a list of strings
+
+        print("🎲 Bet summary:")
         print(f"  Event ID: {event_id}")
         print(f"  Bookmaker ID: {bookmaker_id}")
         print(f"  Sport: {sport}")
@@ -52,7 +56,6 @@ class SportsBetAU(BookmakerAPI):
         print(f"  Odds: {odds} {odds_unit}")
 
     def withdraw_funds(self, amount):
-        
         if not self.is_authenticated:
             print("Access denied: User is not authenticated.")
             return  # Exit the method if not authenticated

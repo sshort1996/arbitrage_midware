@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+
 # A generic dataclass representing a bet on an event
 @dataclass
 class Bet:
@@ -9,4 +10,3 @@ class Bet:
     stake: float
     odds: float
     selection: str
-
